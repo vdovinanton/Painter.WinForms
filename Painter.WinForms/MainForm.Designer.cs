@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.ButtonLine = new System.Windows.Forms.Button();
+            this.ButtonPencil = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonNew = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.DrawField = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawField)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar1
@@ -41,6 +43,25 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(827, 23);
             this.progressBar1.TabIndex = 1;
+            // 
+            // ButtonLine
+            // 
+            this.ButtonLine.Image = global::Painter.WinForms.Properties.Resources.Editing_Line_icon;
+            this.ButtonLine.Location = new System.Drawing.Point(10, 74);
+            this.ButtonLine.Name = "ButtonLine";
+            this.ButtonLine.Size = new System.Drawing.Size(33, 30);
+            this.ButtonLine.TabIndex = 5;
+            this.ButtonLine.UseVisualStyleBackColor = true;
+            // 
+            // ButtonPencil
+            // 
+            this.ButtonPencil.Image = global::Painter.WinForms.Properties.Resources.Pencil_icon;
+            this.ButtonPencil.Location = new System.Drawing.Point(10, 38);
+            this.ButtonPencil.Name = "ButtonPencil";
+            this.ButtonPencil.Size = new System.Drawing.Size(33, 30);
+            this.ButtonPencil.TabIndex = 4;
+            this.ButtonPencil.UseVisualStyleBackColor = true;
+            this.ButtonPencil.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
             // 
             // ButtonSave
             // 
@@ -54,45 +75,56 @@
             // ButtonNew
             // 
             this.ButtonNew.Image = global::Painter.WinForms.Properties.Resources.Files_New_File_icon;
-            this.ButtonNew.Location = new System.Drawing.Point(12, 3);
+            this.ButtonNew.Location = new System.Drawing.Point(10, 3);
             this.ButtonNew.Name = "ButtonNew";
             this.ButtonNew.Size = new System.Drawing.Size(33, 30);
             this.ButtonNew.TabIndex = 2;
             this.ButtonNew.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // DrawField
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(51, 39);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(710, 352);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.DrawField.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DrawField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DrawField.Location = new System.Drawing.Point(51, 39);
+            this.DrawField.Name = "DrawField";
+            this.DrawField.Size = new System.Drawing.Size(710, 352);
+            this.DrawField.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DrawField.TabIndex = 0;
+            this.DrawField.TabStop = false;
+            this.DrawField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseDown);
+            this.DrawField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseMove);
+            this.DrawField.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseUp);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 418);
+            this.Controls.Add(this.ButtonLine);
+            this.Controls.Add(this.ButtonPencil);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonNew);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.DrawField);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Painter";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawField)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox DrawField;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button ButtonNew;
         private System.Windows.Forms.Button ButtonSave;
+        private System.Windows.Forms.Button ButtonPencil;
+        private System.Windows.Forms.Button ButtonLine;
     }
 }
 
