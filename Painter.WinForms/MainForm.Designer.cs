@@ -1,4 +1,6 @@
-﻿namespace Painter.WinForms
+﻿using System.Drawing;
+
+namespace Painter.WinForms
 {
     partial class MainForm
     {
@@ -26,7 +28,9 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        /// <param name="currentBorderColor">Default button main color</param>
+        /// <param name="currentBackgroundColor">Default button second color</param>
+        private void InitializeComponent(Color currentBorderColor, Color currentBackgroundColor)
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Circle = new System.Windows.Forms.Button();
@@ -36,6 +40,9 @@
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonNew = new System.Windows.Forms.Button();
             this.DrawField = new System.Windows.Forms.PictureBox();
+            this.Colors = new System.Windows.Forms.ColorDialog();
+            this.BorderColor = new System.Windows.Forms.Button();
+            this.BackgroundColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DrawField)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,19 +118,46 @@
             this.DrawField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DrawField.Location = new System.Drawing.Point(51, 39);
             this.DrawField.Name = "DrawField";
-            this.DrawField.Size = new System.Drawing.Size(710, 352);
-            this.DrawField.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DrawField.Size = new System.Drawing.Size(721, 352);
             this.DrawField.TabIndex = 0;
             this.DrawField.TabStop = false;
             this.DrawField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseDown);
             this.DrawField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseMove);
             this.DrawField.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseUp);
             // 
+            // Colors
+            // 
+            this.Colors.AllowFullOpen = false;
+            // 
+            // BorderColor
+            // 
+            this.BorderColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BorderColor.Location = new System.Drawing.Point(778, 39);
+            this.BorderColor.Name = "BorderColor";
+            this.BorderColor.Size = new System.Drawing.Size(33, 30);
+            this.BorderColor.TabIndex = 8;
+            this.BorderColor.UseVisualStyleBackColor = true;
+            this.BorderColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
+            this.BorderColor.BackColor = currentBorderColor;
+            // 
+            // BackgroundColor
+            // 
+            this.BackgroundColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BackgroundColor.Location = new System.Drawing.Point(778, 75);
+            this.BackgroundColor.Name = "BackgroundColor";
+            this.BackgroundColor.Size = new System.Drawing.Size(33, 30);
+            this.BackgroundColor.TabIndex = 9;
+            this.BackgroundColor.UseVisualStyleBackColor = true;
+            this.BackgroundColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
+            this.BackgroundColor.BackColor = currentBackgroundColor;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 418);
+            this.Controls.Add(this.BackgroundColor);
+            this.Controls.Add(this.BorderColor);
             this.Controls.Add(this.Circle);
             this.Controls.Add(this.Rectangle);
             this.Controls.Add(this.Line);
@@ -139,7 +173,6 @@
             this.Text = "Painter";
             ((System.ComponentModel.ISupportInitialize)(this.DrawField)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -153,6 +186,9 @@
         private System.Windows.Forms.Button Line;
         private System.Windows.Forms.Button Rectangle;
         private System.Windows.Forms.Button Circle;
+        private System.Windows.Forms.ColorDialog Colors;
+        private System.Windows.Forms.Button BorderColor;
+        private System.Windows.Forms.Button BackgroundColor;
     }
 }
 
