@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawingTools\Circle.cs" />
+    <Compile Include="DrawingTools\Rectangle.cs" />
     <Compile Include="DrawingTools\ToolsBase.cs" />
     <Compile Include="DrawingTools\Line.cs" />
     <Compile Include="MainForm.cs">
@@ -94,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Editing-Line-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Editing-Rectangle-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow-Circle-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

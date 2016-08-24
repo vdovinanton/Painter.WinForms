@@ -63,9 +63,29 @@ namespace Painter.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Arrow_Circle_icon {
+            get {
+                object obj = ResourceManager.GetObject("Arrow-Circle-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Editing_Line_icon {
             get {
                 object obj = ResourceManager.GetObject("Editing-Line-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Editing_Rectangle_icon {
+            get {
+                object obj = ResourceManager.GetObject("Editing-Rectangle-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

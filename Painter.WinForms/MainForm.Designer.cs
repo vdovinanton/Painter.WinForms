@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.Circle = new System.Windows.Forms.Button();
+            this.Rectangle = new System.Windows.Forms.Button();
             this.Line = new System.Windows.Forms.Button();
             this.Pencil = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
@@ -43,6 +45,27 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(827, 23);
             this.progressBar1.TabIndex = 1;
+            // 
+            // Circle
+            // 
+            this.Circle.Image = global::Painter.WinForms.Properties.Resources.Arrow_Circle_icon;
+            this.Circle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Circle.Location = new System.Drawing.Point(10, 146);
+            this.Circle.Name = "Circle";
+            this.Circle.Size = new System.Drawing.Size(33, 30);
+            this.Circle.TabIndex = 7;
+            this.Circle.UseVisualStyleBackColor = true;
+            this.Circle.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
+            // 
+            // Rectangle
+            // 
+            this.Rectangle.Image = global::Painter.WinForms.Properties.Resources.Editing_Rectangle_icon;
+            this.Rectangle.Location = new System.Drawing.Point(10, 110);
+            this.Rectangle.Name = "Rectangle";
+            this.Rectangle.Size = new System.Drawing.Size(33, 30);
+            this.Rectangle.TabIndex = 6;
+            this.Rectangle.UseVisualStyleBackColor = true;
+            this.Rectangle.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
             // 
             // Line
             // 
@@ -101,6 +124,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 418);
+            this.Controls.Add(this.Circle);
+            this.Controls.Add(this.Rectangle);
             this.Controls.Add(this.Line);
             this.Controls.Add(this.Pencil);
             this.Controls.Add(this.ButtonSave);
@@ -126,6 +151,8 @@
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.Button Pencil;
         private System.Windows.Forms.Button Line;
+        private System.Windows.Forms.Button Rectangle;
+        private System.Windows.Forms.Button Circle;
     }
 }
 

@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Painter.WinForms.DrawingTools;
+using Rectangle = Painter.WinForms.DrawingTools.Rectangle;
 
 namespace Painter.WinForms
 {
     public partial class MainForm : Form
     {
-        public ToolsBase CurrentTool { get; set; }
-        public IEnumerable<ToolsBase> Tools { get; set; } = new List<ToolsBase> { new Pencil(), new Line() };
+        private ToolsBase CurrentTool { get; set; }
+        private IEnumerable<ToolsBase> Tools { get; } = new List<ToolsBase> { new Pencil(), new Line(), new Rectangle(), new Circle() };
         public MainForm()
         {
             InitializeComponent();
@@ -22,14 +23,8 @@ namespace Painter.WinForms
 
         private void ChoiceDrawingTool_Click(object sender, EventArgs e)
         {
-            CurrentTool = Tools.FirstOrDefault(q => 
-            {
-                var button = sender as Button;
-                return button != null && q.Name == button.Name;
-            });
-
-            if (CurrentTool != null)
-                CurrentTool.PictureBox = DrawField;
+            CurrentTool = Tools.FirstOrDefault(q => (sender as Button)?.Name == q.Name);
+            if (CurrentTool != null) CurrentTool.PictureBox = DrawField;
         }
 
         private void DrawField_MouseDown(object sender, MouseEventArgs e)

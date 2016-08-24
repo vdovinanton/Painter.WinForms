@@ -11,7 +11,15 @@ namespace Painter.WinForms.DrawingTools
         public PictureBox PictureBox { get; set; }
 
         public abstract void MouseMove(MouseEventArgs e);
-        public abstract void MouseUp(MouseEventArgs e);
+        public virtual void MouseUp(MouseEventArgs e)
+        {
+            using (var g = Graphics.FromImage(PictureBox.Image))
+            {
+                if (Previous != null) g.DrawLine(Pen, Previous.Value.X, Previous.Value.Y, e.X, e.Y);
+            }
+
+            Previous = null;
+        }
 
         public virtual void MouseDown(MouseEventArgs e, Color c1, Color? c2 = null)
         {
