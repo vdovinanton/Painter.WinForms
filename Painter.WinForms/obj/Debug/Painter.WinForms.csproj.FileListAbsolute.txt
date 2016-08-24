@@ -1,1 +1,9 @@
 D:\_github\Painter.WinForms\Painter.WinForms\bin\Debug\Painter.WinForms.exe.config
+D:\_github\Painter.WinForms\Painter.WinForms\bin\Debug\Painter.WinForms.exe
+D:\_github\Painter.WinForms\Painter.WinForms\bin\Debug\Painter.WinForms.pdb
+D:\_github\Painter.WinForms\Painter.WinForms\obj\Debug\Painter.WinForms.csprojResolveAssemblyReference.cache
+D:\_github\Painter.WinForms\Painter.WinForms\obj\Debug\Painter.WinForms.MainForm.resources
+D:\_github\Painter.WinForms\Painter.WinForms\obj\Debug\Painter.WinForms.Properties.Resources.resources
+D:\_github\Painter.WinForms\Painter.WinForms\obj\Debug\Painter.WinForms.csproj.GenerateResource.Cache
+D:\_github\Painter.WinForms\Painter.WinForms\obj\Debug\Painter.WinForms.exe
+D:\_github\Painter.WinForms\Painter.WinForms\obj\Debug\Painter.WinForms.pdb
