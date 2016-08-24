@@ -7,42 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Painter.WinForms.Tools.DrawingTools;
-using Rectangle = Painter.WinForms.Tools.DrawingTools.Rectangle;
 
 namespace Painter.WinForms
 {
     public partial class MainForm : Form
     {
-        private Color _currentBorderColor = Color.Black;
-        private Color _currentBackgroundColor = Color.AliceBlue;
-
-        private ToolsBase CurrentTool { get; set; }
-        private IEnumerable<ToolsBase> Tools { get; } = new List<ToolsBase> { new Pencil(), new Line(), new Rectangle(), new Circle() };
+        private readonly StartupParams _prms;
         public MainForm()
         {
-            InitializeComponent(_currentBorderColor, _currentBackgroundColor);
+            _prms = StartupParams.Instance();
+            InitializeComponent(_prms.CurrentBorderColor, _prms.CurrentBackgroundColor);
         }
 
         private void ChoiceDrawingTool_Click(object sender, EventArgs e)
         {
-            CurrentTool = Tools.FirstOrDefault(q => (sender as Button)?.Name == q.Name);
-            if (CurrentTool != null) CurrentTool.PictureBox = DrawField;
+            _prms.CurrentTool = _prms.Tools.FirstOrDefault(q => (sender as Button)?.Name == q.Name);
+            if (_prms.CurrentTool != null) _prms.CurrentTool.PictureBox = DrawField;
         }
 
         private void DrawField_MouseDown(object sender, MouseEventArgs e)
         {
-            CurrentTool?.MouseDown(e, _currentBorderColor, _currentBackgroundColor);
+            _prms.CurrentTool?.MouseDown(e, _prms.CurrentBorderColor, _prms.CurrentBackgroundColor);
         }
 
         private void DrawField_MouseMove(object sender, MouseEventArgs e)
         {
-            CurrentTool?.MouseMove(e);
+            _prms.CurrentTool?.MouseMove(e);
         }
 
         private void DrawField_MouseUp(object sender, MouseEventArgs e)
         {
-            CurrentTool?.MouseUp(e);
+            _prms.CurrentTool?.MouseUp(e);
         }
 
         private void ButtonChoiceColor_Click(object sender, EventArgs e)
@@ -55,10 +50,10 @@ namespace Painter.WinForms
                     {
                         case "BorderColor":
                             BorderColor.BackColor = colors.Color;
-                            _currentBorderColor = colors.Color; break;
+                            _prms.CurrentBorderColor = colors.Color; break;
                         case "BackgroundColor":
                             BackgroundColor.BackColor = colors.Color;
-                            _currentBackgroundColor = colors.Color; break;
+                            _prms.CurrentBackgroundColor = colors.Color; break;
                     }
                 }
             }
