@@ -46,17 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrawingTools\Circle.cs" />
-    <Compile Include="DrawingTools\Rectangle.cs" />
-    <Compile Include="DrawingTools\ToolsBase.cs" />
-    <Compile Include="DrawingTools\Line.cs" />
+    <Compile Include="Tools\DrawingTools\Circle.cs" />
+    <Compile Include="Tools\DrawingTools\Rectangle.cs" />
+    <Compile Include="Tools\DrawingTools\ToolsBase.cs" />
+    <Compile Include="Tools\DrawingTools\Line.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawingTools\Pencil.cs" />
+    <Compile Include="Tools\DrawingTools\Pencil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">

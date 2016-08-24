@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Painter.WinForms.DrawingTools
+namespace Painter.WinForms.Tools.DrawingTools
 {
     public class Pencil: ToolsBase
     {

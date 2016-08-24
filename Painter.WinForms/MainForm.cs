@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Painter.WinForms.DrawingTools;
-using Rectangle = Painter.WinForms.DrawingTools.Rectangle;
+using Painter.WinForms.Tools.DrawingTools;
+using Rectangle = Painter.WinForms.Tools.DrawingTools.Rectangle;
 
 namespace Painter.WinForms
 {

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Painter.WinForms.DrawingTools
+namespace Painter.WinForms.Tools.DrawingTools
 {
     public abstract class ToolsBase
     {
@@ -21,10 +21,22 @@ namespace Painter.WinForms.DrawingTools
             Previous = null;
         }
 
-        public virtual void MouseDown(MouseEventArgs e, Color c1, Color? c2 = null)
+        protected void CreateImage()
+        {
+            if (PictureBox.Image != null) return;
+
+            var bmp = new Bitmap(PictureBox.Width, PictureBox.Height);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+            }
+            PictureBox.Image = bmp;
+        }
+
+        public virtual void MouseDown(MouseEventArgs e, Color borderColor, Color? backgroundColor = null)
         {
             Previous = new Point(e.X, e.Y);
-            Pen = new Pen(c1, 2);
+            Pen = new Pen(borderColor, 2);
             MouseMove(e);
         }
     }
