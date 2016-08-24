@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.ButtonLine = new System.Windows.Forms.Button();
-            this.ButtonPencil = new System.Windows.Forms.Button();
+            this.Line = new System.Windows.Forms.Button();
+            this.Pencil = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonNew = new System.Windows.Forms.Button();
             this.DrawField = new System.Windows.Forms.PictureBox();
@@ -44,24 +44,25 @@
             this.progressBar1.Size = new System.Drawing.Size(827, 23);
             this.progressBar1.TabIndex = 1;
             // 
-            // ButtonLine
+            // Line
             // 
-            this.ButtonLine.Image = global::Painter.WinForms.Properties.Resources.Editing_Line_icon;
-            this.ButtonLine.Location = new System.Drawing.Point(10, 74);
-            this.ButtonLine.Name = "ButtonLine";
-            this.ButtonLine.Size = new System.Drawing.Size(33, 30);
-            this.ButtonLine.TabIndex = 5;
-            this.ButtonLine.UseVisualStyleBackColor = true;
+            this.Line.Image = global::Painter.WinForms.Properties.Resources.Editing_Line_icon;
+            this.Line.Location = new System.Drawing.Point(10, 74);
+            this.Line.Name = "Line";
+            this.Line.Size = new System.Drawing.Size(33, 30);
+            this.Line.TabIndex = 5;
+            this.Line.UseVisualStyleBackColor = true;
+            this.Line.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
             // 
-            // ButtonPencil
+            // Pencil
             // 
-            this.ButtonPencil.Image = global::Painter.WinForms.Properties.Resources.Pencil_icon;
-            this.ButtonPencil.Location = new System.Drawing.Point(10, 38);
-            this.ButtonPencil.Name = "ButtonPencil";
-            this.ButtonPencil.Size = new System.Drawing.Size(33, 30);
-            this.ButtonPencil.TabIndex = 4;
-            this.ButtonPencil.UseVisualStyleBackColor = true;
-            this.ButtonPencil.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
+            this.Pencil.Image = global::Painter.WinForms.Properties.Resources.Pencil_icon;
+            this.Pencil.Location = new System.Drawing.Point(10, 38);
+            this.Pencil.Name = "Pencil";
+            this.Pencil.Size = new System.Drawing.Size(33, 30);
+            this.Pencil.TabIndex = 4;
+            this.Pencil.UseVisualStyleBackColor = true;
+            this.Pencil.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
             // 
             // ButtonSave
             // 
@@ -100,8 +101,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 418);
-            this.Controls.Add(this.ButtonLine);
-            this.Controls.Add(this.ButtonPencil);
+            this.Controls.Add(this.Line);
+            this.Controls.Add(this.Pencil);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonNew);
             this.Controls.Add(this.progressBar1);
@@ -123,8 +124,8 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button ButtonNew;
         private System.Windows.Forms.Button ButtonSave;
-        private System.Windows.Forms.Button ButtonPencil;
-        private System.Windows.Forms.Button ButtonLine;
+        private System.Windows.Forms.Button Pencil;
+        private System.Windows.Forms.Button Line;
     }
 }
 

@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Painter.WinForms.DrawingTools;
 
 namespace Painter.WinForms
 {
     public partial class MainForm : Form
     {
-        public Pencil Pencil { get; set; }
+        public ToolsBase CurrentTool { get; set; }
+        public IEnumerable<ToolsBase> Tools { get; set; } = new List<ToolsBase> { new Pencil(), new Line() };
         public MainForm()
         {
             InitializeComponent();
@@ -20,22 +22,29 @@ namespace Painter.WinForms
 
         private void ChoiceDrawingTool_Click(object sender, EventArgs e)
         {
-            Pencil = new Pencil { PictureBox = DrawField };
+            CurrentTool = Tools.FirstOrDefault(q => 
+            {
+                var button = sender as Button;
+                return button != null && q.Name == button.Name;
+            });
+
+            if (CurrentTool != null)
+                CurrentTool.PictureBox = DrawField;
         }
 
         private void DrawField_MouseDown(object sender, MouseEventArgs e)
         {
-            Pencil?.MouseDown(e, Color.Black, Color.AliceBlue);
+            CurrentTool?.MouseDown(e, Color.Black, Color.AliceBlue);
         }
 
         private void DrawField_MouseMove(object sender, MouseEventArgs e)
         {
-            Pencil?.MouseMove(e);
+            CurrentTool?.MouseMove(e);
         }
 
         private void DrawField_MouseUp(object sender, MouseEventArgs e)
         {
-            Pencil?.MouseUp(e);
+            CurrentTool?.MouseUp(e);
         }
     }
 }
