@@ -42,12 +42,14 @@ namespace Painter.WinForms
             this.Save = new System.Windows.Forms.Button();
             this.Load = new System.Windows.Forms.Button();
             this.DrawField = new System.Windows.Forms.PictureBox();
+            this.labelLoadPercent = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DrawField)).BeginInit();
             this.SuspendLayout();
             // 
             // LoadBar
             // 
-            this.LoadBar.Location = new System.Drawing.Point(-1, 407);
+            this.LoadBar.BackColor = System.Drawing.SystemColors.Control;
+            this.LoadBar.Location = new System.Drawing.Point(-1, 406);
             this.LoadBar.Name = "LoadBar";
             this.LoadBar.Size = new System.Drawing.Size(827, 13);
             this.LoadBar.TabIndex = 1;
@@ -161,11 +163,20 @@ namespace Painter.WinForms
             this.DrawField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseMove);
             this.DrawField.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseUp);
             // 
+            // labelLoadPercent
+            // 
+            this.labelLoadPercent.AutoSize = true;
+            this.labelLoadPercent.Location = new System.Drawing.Point(778, 387);
+            this.labelLoadPercent.Name = "labelLoadPercent";
+            this.labelLoadPercent.Size = new System.Drawing.Size(0, 13);
+            this.labelLoadPercent.TabIndex = 11;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 418);
+            this.Controls.Add(this.labelLoadPercent);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BackgroundColor);
             this.Controls.Add(this.BorderColor);
@@ -184,6 +195,7 @@ namespace Painter.WinForms
             this.Text = "Painter";
             ((System.ComponentModel.ISupportInitialize)(this.DrawField)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -201,6 +213,7 @@ namespace Painter.WinForms
         private System.Windows.Forms.Button BorderColor;
         private System.Windows.Forms.Button BackgroundColor;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelLoadPercent;
     }
 }
 

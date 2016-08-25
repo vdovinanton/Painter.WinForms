@@ -28,6 +28,8 @@ namespace Painter.WinForms
             _fileManager = FileManager.Instance(DrawField);
             _invert = Invertion.Instance(DrawField, LoadBar);
 
+            labelLoadPercent.BackColor = System.Drawing.Color.Transparent;
+
             BorderColor.BackColor = _prms.CurrentBorderColor;
             BackgroundColor.BackColor = _prms.CurrentBackgroundColor;
         }
@@ -73,15 +75,22 @@ namespace Painter.WinForms
         private async void ButtonInvertion_Click(object sender, EventArgs e)
         {
             var progressIndocator = new Progress<int>(ReportProgress);
-            var totalCount = await _invert.InvertionPictureAsync(progressIndocator);
+            await _invert.ChangePictureAsync(progressIndocator);
         }
 
         private void ReportProgress(int value)
         {
             LoadBar.Increment(1);
-
+            DrawProgressPercent();
             if (LoadBar.Value == LoadBar.Maximum)
                 LoadBar.Value = 0;
+        }
+
+        private void DrawProgressPercent()
+        {
+            var percent =
+                (int) (((double) (LoadBar.Value - LoadBar.Minimum)/(double) (LoadBar.Maximum - LoadBar.Minimum))*100);
+            labelLoadPercent.Text = percent == 100 ? "" : $"{percent} %";
         }
 
         #region Draw events
