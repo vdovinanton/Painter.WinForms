@@ -11,6 +11,7 @@ namespace Painter.WinForms.Tools.DrawingTools
         public PictureBox PictureBox { get; set; }
 
         public abstract void MouseMove(MouseEventArgs e);
+
         public virtual void MouseUp(MouseEventArgs e)
         {
             using (var g = Graphics.FromImage(PictureBox.Image))

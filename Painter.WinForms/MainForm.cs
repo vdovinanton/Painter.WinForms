@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +15,16 @@ namespace Painter.WinForms
     public partial class MainForm : Form
     {
         private readonly StartupParams _prms;
+        private readonly FileManager _fileManager;
         public MainForm()
         {
+            InitializeComponent();
+
             _prms = StartupParams.Instance();
-            InitializeComponent(_prms.CurrentBorderColor, _prms.CurrentBackgroundColor);
+            _fileManager = FileManager.Instance(DrawField);
+
+            BorderColor.BackColor = _prms.CurrentBorderColor;
+            BackgroundColor.BackColor = _prms.CurrentBackgroundColor;
         }
 
         private void ChoiceDrawingTool_Click(object sender, EventArgs e)
@@ -56,6 +64,19 @@ namespace Painter.WinForms
                             _prms.CurrentBackgroundColor = colors.Color; break;
                     }
                 }
+            }
+        }
+
+        private void ButtonSaveOrLoad_Click(object sender, EventArgs e)
+        {
+            switch ((sender as Button)?.Name)
+            {
+                case "Save":
+                    _fileManager.Save();
+                    break;
+                case "Load":
+                    _fileManager.Load();
+                    break;
             }
         }
     }

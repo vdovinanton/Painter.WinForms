@@ -28,17 +28,15 @@ namespace Painter.WinForms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        /// <param name="currentBorderColor">Default button main color</param>
-        /// <param name="currentBackgroundColor">Default button second color</param>
-        private void InitializeComponent(Color currentBorderColor, Color currentBackgroundColor)
+        private void InitializeComponent()
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Circle = new System.Windows.Forms.Button();
             this.Rectangle = new System.Windows.Forms.Button();
             this.Line = new System.Windows.Forms.Button();
             this.Pencil = new System.Windows.Forms.Button();
-            this.ButtonSave = new System.Windows.Forms.Button();
-            this.ButtonNew = new System.Windows.Forms.Button();
+            this.Save = new System.Windows.Forms.Button();
+            this.Load = new System.Windows.Forms.Button();
             this.DrawField = new System.Windows.Forms.PictureBox();
             this.Colors = new System.Windows.Forms.ColorDialog();
             this.BorderColor = new System.Windows.Forms.Button();
@@ -48,9 +46,9 @@ namespace Painter.WinForms
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(-1, 397);
+            this.progressBar1.Location = new System.Drawing.Point(-1, 407);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(827, 23);
+            this.progressBar1.Size = new System.Drawing.Size(827, 13);
             this.progressBar1.TabIndex = 1;
             // 
             // Circle
@@ -94,23 +92,25 @@ namespace Painter.WinForms
             this.Pencil.UseVisualStyleBackColor = true;
             this.Pencil.Click += new System.EventHandler(this.ChoiceDrawingTool_Click);
             // 
-            // ButtonSave
+            // Save
             // 
-            this.ButtonSave.Image = global::Painter.WinForms.Properties.Resources.Save_icon;
-            this.ButtonSave.Location = new System.Drawing.Point(51, 3);
-            this.ButtonSave.Name = "ButtonSave";
-            this.ButtonSave.Size = new System.Drawing.Size(33, 30);
-            this.ButtonSave.TabIndex = 3;
-            this.ButtonSave.UseVisualStyleBackColor = true;
+            this.Save.Image = global::Painter.WinForms.Properties.Resources.Save_icon;
+            this.Save.Location = new System.Drawing.Point(51, 3);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(33, 30);
+            this.Save.TabIndex = 3;
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.ButtonSaveOrLoad_Click);
             // 
-            // ButtonNew
+            // Load
             // 
-            this.ButtonNew.Image = global::Painter.WinForms.Properties.Resources.Files_New_File_icon;
-            this.ButtonNew.Location = new System.Drawing.Point(10, 3);
-            this.ButtonNew.Name = "ButtonNew";
-            this.ButtonNew.Size = new System.Drawing.Size(33, 30);
-            this.ButtonNew.TabIndex = 2;
-            this.ButtonNew.UseVisualStyleBackColor = true;
+            this.Load.Image = global::Painter.WinForms.Properties.Resources.Files_New_File_icon;
+            this.Load.Location = new System.Drawing.Point(10, 3);
+            this.Load.Name = "Load";
+            this.Load.Size = new System.Drawing.Size(33, 30);
+            this.Load.TabIndex = 2;
+            this.Load.UseVisualStyleBackColor = true;
+            this.Load.Click += new System.EventHandler(this.ButtonSaveOrLoad_Click);
             // 
             // DrawField
             // 
@@ -118,7 +118,7 @@ namespace Painter.WinForms
             this.DrawField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DrawField.Location = new System.Drawing.Point(51, 39);
             this.DrawField.Name = "DrawField";
-            this.DrawField.Size = new System.Drawing.Size(721, 352);
+            this.DrawField.Size = new System.Drawing.Size(721, 367);
             this.DrawField.TabIndex = 0;
             this.DrawField.TabStop = false;
             this.DrawField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseDown);
@@ -138,7 +138,6 @@ namespace Painter.WinForms
             this.BorderColor.TabIndex = 8;
             this.BorderColor.UseVisualStyleBackColor = true;
             this.BorderColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
-            this.BorderColor.BackColor = currentBorderColor;
             // 
             // BackgroundColor
             // 
@@ -149,7 +148,6 @@ namespace Painter.WinForms
             this.BackgroundColor.TabIndex = 9;
             this.BackgroundColor.UseVisualStyleBackColor = true;
             this.BackgroundColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
-            this.BackgroundColor.BackColor = currentBackgroundColor;
             // 
             // MainForm
             // 
@@ -162,8 +160,8 @@ namespace Painter.WinForms
             this.Controls.Add(this.Rectangle);
             this.Controls.Add(this.Line);
             this.Controls.Add(this.Pencil);
-            this.Controls.Add(this.ButtonSave);
-            this.Controls.Add(this.ButtonNew);
+            this.Controls.Add(this.Save);
+            this.Controls.Add(this.Load);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.DrawField);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -180,8 +178,8 @@ namespace Painter.WinForms
 
         private System.Windows.Forms.PictureBox DrawField;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button ButtonNew;
-        private System.Windows.Forms.Button ButtonSave;
+        private System.Windows.Forms.Button Load;
+        private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button Pencil;
         private System.Windows.Forms.Button Line;
         private System.Windows.Forms.Button Rectangle;
