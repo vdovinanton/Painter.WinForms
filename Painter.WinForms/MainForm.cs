@@ -7,8 +7,10 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Painter.WinForms.Tools;
 
 namespace Painter.WinForms
 {
@@ -16,12 +18,15 @@ namespace Painter.WinForms
     {
         private readonly StartupParams _prms;
         private readonly FileManager _fileManager;
+        private readonly Invertion _invert;
+
         public MainForm()
         {
             InitializeComponent();
 
             _prms = StartupParams.Instance();
             _fileManager = FileManager.Instance(DrawField);
+            _invert = Invertion.Instance(DrawField, LoadBar);
 
             BorderColor.BackColor = _prms.CurrentBorderColor;
             BackgroundColor.BackColor = _prms.CurrentBackgroundColor;
@@ -31,21 +36,6 @@ namespace Painter.WinForms
         {
             _prms.CurrentTool = _prms.Tools.FirstOrDefault(q => (sender as Button)?.Name == q.Name);
             if (_prms.CurrentTool != null) _prms.CurrentTool.PictureBox = DrawField;
-        }
-
-        private void DrawField_MouseDown(object sender, MouseEventArgs e)
-        {
-            _prms.CurrentTool?.MouseDown(e, _prms.CurrentBorderColor, _prms.CurrentBackgroundColor);
-        }
-
-        private void DrawField_MouseMove(object sender, MouseEventArgs e)
-        {
-            _prms.CurrentTool?.MouseMove(e);
-        }
-
-        private void DrawField_MouseUp(object sender, MouseEventArgs e)
-        {
-            _prms.CurrentTool?.MouseUp(e);
         }
 
         private void ButtonChoiceColor_Click(object sender, EventArgs e)
@@ -79,5 +69,36 @@ namespace Painter.WinForms
                     break;
             }
         }
+
+        private async void ButtonInvertion_Click(object sender, EventArgs e)
+        {
+            var progressIndocator = new Progress<int>(ReportProgress);
+            var totalCount = await _invert.InvertionPictureAsync(progressIndocator);
+        }
+
+        private void ReportProgress(int value)
+        {
+            LoadBar.Increment(1);
+
+            if (LoadBar.Value == LoadBar.Maximum)
+                LoadBar.Value = 0;
+        }
+
+        #region Draw events
+        private void DrawField_MouseDown(object sender, MouseEventArgs e)
+        {
+            _prms.CurrentTool?.MouseDown(e, _prms.CurrentBorderColor, _prms.CurrentBackgroundColor);
+        }
+
+        private void DrawField_MouseMove(object sender, MouseEventArgs e)
+        {
+            _prms.CurrentTool?.MouseMove(e);
+        }
+
+        private void DrawField_MouseUp(object sender, MouseEventArgs e)
+        {
+            _prms.CurrentTool?.MouseUp(e);
+        }
+        #endregion
     }
 }

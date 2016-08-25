@@ -30,7 +30,11 @@ namespace Painter.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.LoadBar = new System.Windows.Forms.ProgressBar();
+            this.Colors = new System.Windows.Forms.ColorDialog();
+            this.BorderColor = new System.Windows.Forms.Button();
+            this.BackgroundColor = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.Circle = new System.Windows.Forms.Button();
             this.Rectangle = new System.Windows.Forms.Button();
             this.Line = new System.Windows.Forms.Button();
@@ -38,18 +42,50 @@ namespace Painter.WinForms
             this.Save = new System.Windows.Forms.Button();
             this.Load = new System.Windows.Forms.Button();
             this.DrawField = new System.Windows.Forms.PictureBox();
-            this.Colors = new System.Windows.Forms.ColorDialog();
-            this.BorderColor = new System.Windows.Forms.Button();
-            this.BackgroundColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DrawField)).BeginInit();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // LoadBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(-1, 407);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(827, 13);
-            this.progressBar1.TabIndex = 1;
+            this.LoadBar.Location = new System.Drawing.Point(-1, 407);
+            this.LoadBar.Name = "LoadBar";
+            this.LoadBar.Size = new System.Drawing.Size(827, 13);
+            this.LoadBar.TabIndex = 1;
+            // 
+            // Colors
+            // 
+            this.Colors.AllowFullOpen = false;
+            // 
+            // BorderColor
+            // 
+            this.BorderColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BorderColor.Location = new System.Drawing.Point(778, 39);
+            this.BorderColor.Name = "BorderColor";
+            this.BorderColor.Size = new System.Drawing.Size(33, 30);
+            this.BorderColor.TabIndex = 8;
+            this.BorderColor.UseVisualStyleBackColor = true;
+            this.BorderColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
+            // 
+            // BackgroundColor
+            // 
+            this.BackgroundColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BackgroundColor.Location = new System.Drawing.Point(778, 75);
+            this.BackgroundColor.Name = "BackgroundColor";
+            this.BackgroundColor.Size = new System.Drawing.Size(33, 30);
+            this.BackgroundColor.TabIndex = 9;
+            this.BackgroundColor.UseVisualStyleBackColor = true;
+            this.BackgroundColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = global::Painter.WinForms.Properties.Resources.Cultures_Triskelion_icon;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(778, 127);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(33, 30);
+            this.button1.TabIndex = 10;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.ButtonInvertion_Click);
             // 
             // Circle
             // 
@@ -104,7 +140,7 @@ namespace Painter.WinForms
             // 
             // Load
             // 
-            this.Load.Image = global::Painter.WinForms.Properties.Resources.Files_New_File_icon;
+            this.Load.Image = global::Painter.WinForms.Properties.Resources.open_file_icon;
             this.Load.Location = new System.Drawing.Point(10, 3);
             this.Load.Name = "Load";
             this.Load.Size = new System.Drawing.Size(33, 30);
@@ -125,35 +161,12 @@ namespace Painter.WinForms
             this.DrawField.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseMove);
             this.DrawField.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawField_MouseUp);
             // 
-            // Colors
-            // 
-            this.Colors.AllowFullOpen = false;
-            // 
-            // BorderColor
-            // 
-            this.BorderColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BorderColor.Location = new System.Drawing.Point(778, 39);
-            this.BorderColor.Name = "BorderColor";
-            this.BorderColor.Size = new System.Drawing.Size(33, 30);
-            this.BorderColor.TabIndex = 8;
-            this.BorderColor.UseVisualStyleBackColor = true;
-            this.BorderColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
-            // 
-            // BackgroundColor
-            // 
-            this.BackgroundColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BackgroundColor.Location = new System.Drawing.Point(778, 75);
-            this.BackgroundColor.Name = "BackgroundColor";
-            this.BackgroundColor.Size = new System.Drawing.Size(33, 30);
-            this.BackgroundColor.TabIndex = 9;
-            this.BackgroundColor.UseVisualStyleBackColor = true;
-            this.BackgroundColor.Click += new System.EventHandler(this.ButtonChoiceColor_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 418);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.BackgroundColor);
             this.Controls.Add(this.BorderColor);
             this.Controls.Add(this.Circle);
@@ -162,7 +175,7 @@ namespace Painter.WinForms
             this.Controls.Add(this.Pencil);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.Load);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.LoadBar);
             this.Controls.Add(this.DrawField);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -177,7 +190,7 @@ namespace Painter.WinForms
         #endregion
 
         private System.Windows.Forms.PictureBox DrawField;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar LoadBar;
         private System.Windows.Forms.Button Load;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button Pencil;
@@ -187,6 +200,7 @@ namespace Painter.WinForms
         private System.Windows.Forms.ColorDialog Colors;
         private System.Windows.Forms.Button BorderColor;
         private System.Windows.Forms.Button BackgroundColor;
+        private System.Windows.Forms.Button button1;
     }
 }
 

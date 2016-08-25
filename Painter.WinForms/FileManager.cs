@@ -39,7 +39,9 @@ namespace Painter.WinForms
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
                     using (var fsstream = new FileStream(openFile.FileName, FileMode.OpenOrCreate))
+                    {
                         _drawField.Image = new Bitmap(fsstream);
+                    }
                 }
             }
         }
