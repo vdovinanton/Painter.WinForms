@@ -21,7 +21,7 @@ namespace Painter.WinForms
 
         private static PictureBox _drawField;
 
-        private static readonly IDictionary<string, ImageFormat> AllowFormats  = new Dictionary<string, ImageFormat>
+        private static readonly IDictionary<string, ImageFormat> AvailableFormats  = new Dictionary<string, ImageFormat>
         {
             { ".png", ImageFormat.Png },
             { ".bmp", ImageFormat.Bmp},
@@ -31,7 +31,7 @@ namespace Painter.WinForms
         /// <summary>
         /// formatting allow formats for the <see cref="OpenFileDialog"/> and <see cref="SaveFileDialog"/>
         /// </summary>
-        private readonly string _formatFilter = AllowFormats.Keys.Aggregate(string.Empty,
+        private readonly string _formatFilter = AvailableFormats.Keys.Aggregate(string.Empty,
                 (current, allowFormat) => current + $"|{allowFormat} (*{allowFormat})|*{allowFormat}")
                     .TrimStart('|');
 
@@ -42,9 +42,7 @@ namespace Painter.WinForms
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
                     using (var fsstream = new FileStream(openFile.FileName, FileMode.OpenOrCreate))
-                    {
                         _drawField.Image = new Bitmap(fsstream);
-                    }
                 }
             }
         }
@@ -56,7 +54,7 @@ namespace Painter.WinForms
                 if (saveFile.ShowDialog() == DialogResult.OK)
                 {
                     var extension = Path.GetExtension(saveFile.FileName);
-                    var selectedFormat = AllowFormats.FirstOrDefault(q => q.Key == extension);
+                    var selectedFormat = AvailableFormats.FirstOrDefault(q => q.Key == extension);
                     var format = selectedFormat.Value ?? ImageFormat.Png;
 
                     if (_drawField.Image == null)

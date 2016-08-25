@@ -8,7 +8,7 @@ namespace Painter.WinForms.Tools
 {
     public class Inversion
     {
-        #region Singletone
+        #region Singleton
         private static readonly Lazy<Inversion> _instance = new Lazy<Inversion>(() => new Inversion());
         public static Inversion Instance(PictureBox drawField, ProgressBar progressBar)
         {
@@ -17,6 +17,9 @@ namespace Painter.WinForms.Tools
             return _instance.Value;
         }
         #endregion
+
+        // Only using Singleton
+        private Inversion() { }
 
         private static PictureBox _drawField;
         private static ProgressBar _progressBar;
@@ -29,14 +32,13 @@ namespace Painter.WinForms.Tools
         public async Task ChangePictureAsync(IProgress<int> progress)
         {
             if (_drawField.Image == null) return;
-            
+
             var pic = new Bitmap(_drawField.Image);
             var totalCount = pic.Height;
             _progressBar.Maximum = totalCount;
 
             await Task.Run(() =>
             {
-                var tempCount = 0;
                 for (var y = 0; y <= (pic.Height - 1); y++)
                 {
                     for (var x = 0; x <= (pic.Width - 1); x++)
@@ -46,8 +48,7 @@ namespace Painter.WinForms.Tools
                         pic.SetPixel(x, y, inv);
                     }
                     Thread.Sleep(10);
-                    progress?.Report((tempCount * 100) / totalCount);
-                    tempCount++;
+                    progress?.Report((y * 100) / totalCount);
                 }
                 _drawField.Image = pic;
             });   

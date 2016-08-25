@@ -7,9 +7,9 @@ namespace Painter.WinForms
 {
     public partial class MainForm : Form
     {
+        private readonly Inversion _invert;
         private readonly StartupParams _prms;
         private readonly FileManager _fileManager;
-        private readonly Inversion _invert;
 
         public MainForm()
         {
