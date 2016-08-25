@@ -5,22 +5,14 @@ namespace Painter.WinForms.Tools.DrawingTools
 {
     public abstract class ToolsBase
     {
+        // Tools for the drawing on the pictureBox
         protected Pen Pen { get; set; }
-        public string Name { get; set; }
         protected Point? Point { get; set; }
-        public PictureBox PictureBox { get; set; }
 
-        public abstract void MouseMove(MouseEventArgs e);
-
-        public virtual void MouseUp(MouseEventArgs e)
-        {
-            using (var g = Graphics.FromImage(PictureBox.Image))
-            {
-                if (Point != null) g.DrawLine(Pen, Point.Value.X, Point.Value.Y, e.X, e.Y);
-            }
-
-            Point = null;
-        }
+        /// <summary>
+        /// Unique instrument name, initial in constructor
+        /// </summary>
+        public string Name { get; set; }
 
         protected void CreateImage()
         {
@@ -34,6 +26,36 @@ namespace Painter.WinForms.Tools.DrawingTools
             PictureBox.Image = bmp;
         }
 
+        /// <summary>
+        /// Current <see cref="PictureBox"/>
+        /// </summary>
+        public PictureBox PictureBox { get; set; }
+
+        /// <summary>
+        /// Mouse move event
+        /// </summary>
+        /// <param name="e">Mouse event parameters</param>
+        public abstract void MouseMove(MouseEventArgs e);
+
+        /// <summary>
+        /// Mouse up event
+        /// </summary>
+        /// <param name="e">Mouse event parameters</param>
+        public virtual void MouseUp(MouseEventArgs e)
+        {
+            using (var g = Graphics.FromImage(PictureBox.Image))
+            {
+                if (Point != null) g.DrawLine(Pen, Point.Value.X, Point.Value.Y, e.X, e.Y);
+            }
+            Point = null;
+        }
+
+        /// <summary>
+        /// Mouse down event
+        /// </summary>
+        /// <param name="e">Mouse event parameters</param>
+        /// <param name="borderColor">Color for the border figure</param>
+        /// <param name="backgroundColor">Back color for the figure</param>
         public virtual void MouseDown(MouseEventArgs e, Color borderColor, Color? backgroundColor = null)
         {
             Point = new Point(e.X, e.Y);

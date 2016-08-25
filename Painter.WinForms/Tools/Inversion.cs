@@ -6,26 +6,35 @@ using System.Windows.Forms;
 
 namespace Painter.WinForms.Tools
 {
-    public class Invertion
+    public class Inversion
     {
-        private static readonly Lazy<Invertion> _instance = new Lazy<Invertion>(() => new Invertion());
-        public static Invertion Instance(PictureBox drawField, ProgressBar progressBar)
+        #region Singletone
+        private static readonly Lazy<Inversion> _instance = new Lazy<Inversion>(() => new Inversion());
+        public static Inversion Instance(PictureBox drawField, ProgressBar progressBar)
         {
             _drawField = drawField;
             _progressBar = progressBar;
             return _instance.Value;
         }
+        #endregion
 
         private static PictureBox _drawField;
         private static ProgressBar _progressBar;
 
-        public async Task<int> ChangePictureAsync(IProgress<int> progress)
+        /// <summary>
+        /// Invert picture
+        /// </summary>
+        /// <param name="progress">Report back progress</param>
+        /// <returns></returns>
+        public async Task ChangePictureAsync(IProgress<int> progress)
         {
+            if (_drawField.Image == null) return;
+            
             var pic = new Bitmap(_drawField.Image);
             var totalCount = pic.Height;
             _progressBar.Maximum = totalCount;
 
-            var progressCount = await Task.Run(() =>
+            await Task.Run(() =>
             {
                 var tempCount = 0;
                 for (var y = 0; y <= (pic.Height - 1); y++)
@@ -41,9 +50,7 @@ namespace Painter.WinForms.Tools
                     tempCount++;
                 }
                 _drawField.Image = pic;
-                return tempCount;
-            });
-            return progressCount;
+            });   
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Painter.WinForms
     {
         private readonly StartupParams _prms;
         private readonly FileManager _fileManager;
-        private readonly Invertion _invert;
+        private readonly Inversion _invert;
 
         public MainForm()
         {
@@ -17,20 +17,21 @@ namespace Painter.WinForms
 
             _prms = StartupParams.Instance();
             _fileManager = FileManager.Instance(DrawField);
-            _invert = Invertion.Instance(DrawField, LoadBar);
+            _invert = Inversion.Instance(DrawField, LoadBar);
 
-            labelLoadPercent.BackColor = System.Drawing.Color.Transparent;
-
+            // Set default figure colors
             BorderColor.BackColor = _prms.CurrentBorderColor;
             BackgroundColor.BackColor = _prms.CurrentBackgroundColor;
         }
 
+        // Select tool
         private void ChoiceDrawingTool_Click(object sender, EventArgs e)
         {
             _prms.CurrentTool = _prms.Tools.FirstOrDefault(q => (sender as Button)?.Name == q.Name);
             if (_prms.CurrentTool != null) _prms.CurrentTool.PictureBox = DrawField;
         }
 
+        // Select colors
         private void ButtonChoiceColor_Click(object sender, EventArgs e)
         {
             using (var colors = new ColorDialog())
@@ -49,7 +50,7 @@ namespace Painter.WinForms
                 }
             }
         }
-
+        
         private void ButtonSaveOrLoad_Click(object sender, EventArgs e)
         {
             switch ((sender as Button)?.Name)
@@ -63,25 +64,21 @@ namespace Painter.WinForms
             }
         }
 
-        private async void ButtonInvertion_Click(object sender, EventArgs e)
+        private async void ButtonInversion_Click(object sender, EventArgs e)
         {
-            var progressIndocator = new Progress<int>(ReportProgress);
-            await _invert.ChangePictureAsync(progressIndocator);
-        }
+            // Will be called everyone inversion step
+            var progressIndecator = new Progress<int>(i =>
+            {
+                LoadBar.Increment(1);
 
-        private void ReportProgress(int value)
-        {
-            LoadBar.Increment(1);
-            DrawProgressPercent();
-            if (LoadBar.Value == LoadBar.Maximum)
-                LoadBar.Value = 0;
-        }
+                var percent = (int)(((double)(LoadBar.Value - LoadBar.Minimum) / (double)(LoadBar.Maximum - LoadBar.Minimum)) * 100);
+                labelLoadPercent.Text = percent == 100 ? "" : $"{percent} %";
 
-        private void DrawProgressPercent()
-        {
-            var percent =
-                (int) (((double) (LoadBar.Value - LoadBar.Minimum)/(double) (LoadBar.Maximum - LoadBar.Minimum))*100);
-            labelLoadPercent.Text = percent == 100 ? "" : $"{percent} %";
+                if (LoadBar.Value == LoadBar.Maximum)
+                    LoadBar.Value = 0;
+            });
+
+            await _invert.ChangePictureAsync(progressIndecator);
         }
 
         #region Draw events

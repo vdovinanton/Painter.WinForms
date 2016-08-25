@@ -36,6 +36,7 @@ namespace Painter.WinForms.Tools.DrawingTools
             Point = null;
         }
 
+        // Draw circle
         private void Draw(MouseEventArgs e, Graphics g)
         {
             if (Point == null) return;
