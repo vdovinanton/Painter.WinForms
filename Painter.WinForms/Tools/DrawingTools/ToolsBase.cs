@@ -7,7 +7,7 @@ namespace Painter.WinForms.Tools.DrawingTools
     {
         protected Pen Pen { get; set; }
         public string Name { get; set; }
-        protected Point? Previous { get; set; }
+        protected Point? Point { get; set; }
         public PictureBox PictureBox { get; set; }
 
         public abstract void MouseMove(MouseEventArgs e);
@@ -16,10 +16,10 @@ namespace Painter.WinForms.Tools.DrawingTools
         {
             using (var g = Graphics.FromImage(PictureBox.Image))
             {
-                if (Previous != null) g.DrawLine(Pen, Previous.Value.X, Previous.Value.Y, e.X, e.Y);
+                if (Point != null) g.DrawLine(Pen, Point.Value.X, Point.Value.Y, e.X, e.Y);
             }
 
-            Previous = null;
+            Point = null;
         }
 
         protected void CreateImage()
@@ -36,7 +36,7 @@ namespace Painter.WinForms.Tools.DrawingTools
 
         public virtual void MouseDown(MouseEventArgs e, Color borderColor, Color? backgroundColor = null)
         {
-            Previous = new Point(e.X, e.Y);
+            Point = new Point(e.X, e.Y);
             Pen = new Pen(borderColor, 2);
             MouseMove(e);
         }

@@ -10,7 +10,7 @@ namespace Painter.WinForms.Tools.DrawingTools
         }
         public override void MouseMove(MouseEventArgs e)
         {
-            if (Previous == null) return;
+            if (Point == null) return;
 
             CreateImage();
 
@@ -18,7 +18,7 @@ namespace Painter.WinForms.Tools.DrawingTools
             PictureBox.Update();
             using (var g = PictureBox.CreateGraphics())
             {
-                g.DrawLine(Pen, Previous.Value.X, Previous.Value.Y, e.X, e.Y);
+                g.DrawLine(Pen, Point.Value.X, Point.Value.Y, e.X, e.Y);
             }
         }
     }

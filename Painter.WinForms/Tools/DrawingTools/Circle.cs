@@ -13,7 +13,7 @@ namespace Painter.WinForms.Tools.DrawingTools
         }
         public override void MouseMove(MouseEventArgs e)
         {
-            if (Previous == null) return;
+            if (Point == null) return;
 
             CreateImage();
             PictureBox.Invalidate();
@@ -24,7 +24,7 @@ namespace Painter.WinForms.Tools.DrawingTools
 
         public override void MouseDown(MouseEventArgs e, Color borderColor, Color? backgroundColor = null)
         {
-            Previous = new Point(e.X, e.Y);
+            Point = new Point(e.X, e.Y);
             Pen = new Pen(borderColor, 2);
             if (backgroundColor != null) _backgroundColor = new SolidBrush(backgroundColor.Value);
             MouseMove(e);
@@ -33,17 +33,17 @@ namespace Painter.WinForms.Tools.DrawingTools
         public override void MouseUp(MouseEventArgs e)
         {
             Draw(e, Graphics.FromImage(PictureBox.Image));
-            Previous = null;
+            Point = null;
         }
 
         private void Draw(MouseEventArgs e, Graphics g)
         {
-            if (Previous == null) return;
+            if (Point == null) return;
 
-            var size = Math.Min(e.X - Previous.Value.X, e.Y - Previous.Value.Y);
+            var size = Math.Min(e.X - Point.Value.X, e.Y - Point.Value.Y);
 
-            g.FillEllipse(_backgroundColor, Previous.Value.X, Previous.Value.Y, size, size);
-            g.DrawEllipse(Pen, Previous.Value.X, Previous.Value.Y, size, size);
+            g.FillEllipse(_backgroundColor, Point.Value.X, Point.Value.Y, size, size);
+            g.DrawEllipse(Pen, Point.Value.X, Point.Value.Y, size, size);
         }
     }
 }

@@ -28,6 +28,9 @@ namespace Painter.WinForms
             { ".jpg", ImageFormat.Jpeg},
         };
 
+        /// <summary>
+        /// formatting allow formats for the <see cref="OpenFileDialog"/> and <see cref="SaveFileDialog"/>
+        /// </summary>
         private readonly string _formatFilter = AllowFormats.Keys.Aggregate(string.Empty,
                 (current, allowFormat) => current + $"|{allowFormat} (*{allowFormat})|*{allowFormat}")
                     .TrimStart('|');
@@ -56,8 +59,25 @@ namespace Painter.WinForms
                     var selectedFormat = AllowFormats.FirstOrDefault(q => q.Key == extension);
                     var format = selectedFormat.Value ?? ImageFormat.Png;
 
-                    _drawField.Image.Save(saveFile.FileName, format);
+                    if (_drawField.Image == null)
+                        CreateEmptyCanvas();
+
+                    _drawField.Image?.Save(saveFile.FileName, format);
                 }
+            }
+        }
+
+        /// <summary>
+        /// If a u want save empty canvans :\
+        /// </summary>
+        private static void CreateEmptyCanvas()
+        {
+            var image = new Bitmap(_drawField.Width, _drawField.Height);
+
+            using (var grp = Graphics.FromImage(image))
+            {
+                grp.FillRectangle(Brushes.White, 0, 0, _drawField.Width, _drawField.Height);
+                _drawField.Image = new Bitmap(_drawField.Width, _drawField.Height, grp);
             }
         }
     }

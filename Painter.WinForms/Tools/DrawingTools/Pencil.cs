@@ -11,25 +11,16 @@ namespace Painter.WinForms.Tools.DrawingTools
         }
         public override void MouseMove(MouseEventArgs e)
         {
-            if (Previous == null) return;
+            if (Point == null) return;
 
-            if (PictureBox.Image == null)
-            {
-                //TODO: выделить функциб в базовом классе
-                var bmp = new Bitmap(PictureBox.Width, PictureBox.Height);
-                using (var g = Graphics.FromImage(bmp))
-                {
-                    g.Clear(Color.White);
-                }
-                PictureBox.Image = bmp;
-            }
+            CreateImage();
             using (var g = Graphics.FromImage(PictureBox.Image))
             {
-                g.DrawLine(Pen, Previous.Value.X, Previous.Value.Y, e.X, e.Y);
+                g.DrawLine(Pen, Point.Value.X, Point.Value.Y, e.X, e.Y);
             }
 
             PictureBox.Invalidate();
-            Previous = new Point(e.X, e.Y);
+            Point = new Point(e.X, e.Y);
         }
     }
 }
